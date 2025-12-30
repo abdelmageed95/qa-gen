@@ -347,7 +347,7 @@ GET /health
 
 ### Multi-Agent Question Generation Pipeline
 
-![Multi-Agent Workflow](img/multi_agent_workflow.png)
+![Multi-Agent Workflow](img/agent_workflow.png)
 
 ![LangGraph Workflow](img/langgraph_workflow_detailed.png)
 
