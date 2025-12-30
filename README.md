@@ -5,7 +5,9 @@
 A production-ready FastAPI application that leverages LangGraph multi-agent workflows and LandingAI's Document Parse & Transform (DPT) to automatically generate high-quality Multiple Choice Questions (MCQs) from PDF documents.
 
 ---
+![Multi-Agent Workflow](img/agent_workflow.png)
 
+---
 ## Features
 
 ### Core Capabilities
@@ -347,7 +349,6 @@ GET /health
 
 ### Multi-Agent Question Generation Pipeline
 
-![Multi-Agent Workflow](img/agent_workflow.png)
 
 ![LangGraph Workflow](img/langgraph_workflow_detailed.png)
 
