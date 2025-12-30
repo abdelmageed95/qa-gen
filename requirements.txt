@@ -1,0 +1,31 @@
+fastapi
+uvicorn[standard]
+python-multipart
+pydantic
+pydantic-settings
+
+# LLM and Agent frameworks
+langchain
+langchain-openai
+langchain-community
+langgraph
+openai
+graphviz==0.21
+landingai-ade==1.0.0
+# Vector DB
+chromadb
+
+# PDF Processing
+pypdf
+pdfplumber
+
+# Utilities
+python-dotenv
+tenacity
+
+# Testing
+pytest
+pytest-asyncio
+pytest-cov
+httpx
+sentence-transformers

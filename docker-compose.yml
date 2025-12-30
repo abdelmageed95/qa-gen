@@ -1,0 +1,48 @@
+services:
+  api:
+    build: .
+    container_name: qa-generator
+    ports:
+      - "8000:8000"
+    environment:
+      # OpenAI Configuration
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_MODEL=${OPENAI_MODEL:-gpt-4o-mini}
+      - EMBEDDING_MODEL=${EMBEDDING_MODEL:-text-embedding-3-small}
+
+      # LandingAI Configuration (optional)
+      - VISION_AGENT_API_KEY=${VISION_AGENT_API_KEY:-}
+      - USE_LANDINGAI_CHUNKING=${USE_LANDINGAI_CHUNKING:-false}
+      - LANDINGAI_DPT_MODEL=${LANDINGAI_DPT_MODEL:-dpt-2-latest}
+
+      # ChromaDB Configuration
+      - CHROMA_PERSIST_DIR=/app/chroma_db
+
+      # Document Processing
+      - CHUNK_SIZE=${CHUNK_SIZE:-1000}
+      - CHUNK_OVERLAP=${CHUNK_OVERLAP:-200}
+      - RETRIEVAL_TOP_K=${RETRIEVAL_TOP_K:-5}
+
+      # Agent Configuration
+      - MAX_ITERATIONS=${MAX_ITERATIONS:-3}
+      - MIN_QUESTION_SCORE=${MIN_QUESTION_SCORE:-0.7}
+
+      # Application Configuration
+      - UPLOAD_DIR=/app/uploads
+      - DOCUMENT_REGISTRY_PATH=/app/chroma_db/documents.json
+    volumes:
+      - chroma_data:/app/chroma_db        # Persistent vector DB storage
+      - uploads_data:/app/uploads         # Uploaded PDFs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  chroma_data:
+    driver: local
+  uploads_data:
+    driver: local
